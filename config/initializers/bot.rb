@@ -1,0 +1,17 @@
+require 'facebook/messenger'
+
+# subscribe it to the Page to get messages from Facebook
+Facebook::Messenger::Subscriptions.subscribe(access_token: ENV['ACCESS_TOKEN'])
+
+unless Rails.env.production?
+  bot_files = Dir[Rails.root.join('app', 'bot', '**', '*.rb')]
+  bot_reloader = ActiveSupport::FileUpdateChecker.new(bot_files) do
+    bot_files.each{ |file| require_dependency file }
+  end
+
+  ActionDispatch::Callbacks.to_prepare do
+    bot_reloader.execute_if_updated
+  end
+
+  bot_files.each { |file| require_dependency file }
+end
