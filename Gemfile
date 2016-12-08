@@ -47,3 +47,5 @@ end
 
 gem 'facebook-messenger'
 gem 'figaro'
+gem 'httparty'
+gem 'workflow'
