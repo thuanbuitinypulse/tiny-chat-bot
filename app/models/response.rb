@@ -3,4 +3,5 @@ class Response < ActiveRecord::Base
 
   ANSWER_QUESTION = 'answer_question'
   ADDITIONAL = 'additional'
+  SUGGESTION = 'suggestion'
 end

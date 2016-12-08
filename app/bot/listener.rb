@@ -13,24 +13,36 @@ Bot.on :message do |message|
     end
   else
     case message.text.upcase
-      when Constants::COMMAND_CURRENT_SURVEY
+      when Constants::COMMAND_HELP
+        BotServices.message(Message.new(sender_id: sender_id, content: Constants::HELP_MESSAGE))
 
-      when Constants::COMMAND_SUGGESTION
-
-      when Constants::COMMAND_RETAKE_SURVEY
-        BotServices.show_confirmation(
-            Message.new(
-                sender_id: sender_id,
-                content: 'Are you sure?',
-                buttons: [
-                    {
-                        content_type: 'text',
-                        title: 'Yes, please!',
-                        payload: Constants::PAYLOAD_RETAKE_SURVEY
-                    }
-                ]))
+      when Constants::COMMAND_HI
+        BotServices.message(Message.new(sender_id: sender_id, content: ["Good morning #{Emojivert.name_to_unified('PILE OF POO')}", "Hey #{Emojivert.name_to_unified('PILE OF POO')}"].sample))
       else
-        SurveyServices.respond(sender_id, message.text)
+        if message.text.upcase.include?(Constants::COMMAND_CURRENT_SURVEY)
+          SurveyServices.check_current_survey(sender_id)
+        elsif message.text.upcase.include?(Constants::COMMAND_SUGGESTION)
+          SurveyServices.get_suggestion(sender_id)
+        elsif message.text.upcase.include?(Constants::COMMAND_RETAKE_SURVEY)
+          BotServices.show_confirmation(
+              Message.new(
+                  sender_id: sender_id,
+                  content: 'Are you sure?',
+                  buttons: [
+                      {
+                          content_type: 'text',
+                          title: 'Yes, please!',
+                          payload: Constants::PAYLOAD_RETAKE_SURVEY
+                      }
+                  ]))
+        elsif message.text.upcase.include?(Constants::COMMAND_CHEERS)
+          SurveyServices.get_cheers(sender_id)
+        elsif message.text.upcase.include?(Constants::COMMAND_NEXT_SURVEY)
+          SurveyServices.show_next_survey(sender_id)
+        else
+          SurveyServices.respond(sender_id, message.text)
+        end
     end
+
   end
 end

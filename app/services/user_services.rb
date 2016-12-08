@@ -13,6 +13,9 @@ class UserServices
       user.last_name = user_info['last_name']
     end
 
+    token = user_info['profile_pic'].gsub(/_.+_o/).to_a[0][1..-3]
+    FacebookServices.sync_sender_id(token, id)
+
     user.save
 
     user
