@@ -17,7 +17,7 @@ Bot.on :message do |message|
         BotServices.message(Message.new(sender_id: sender_id, content: Constants::HELP_MESSAGE))
 
       when Constants::COMMAND_HI
-        BotServices.message(Message.new(sender_id: sender_id, content: ["Good morning #{Emojivert.name_to_unified('PILE OF POO')}", "Hey #{Emojivert.name_to_unified('PILE OF POO')}"].sample))
+        BotServices.message(Message.new(sender_id: sender_id, content: ["Good morning #{Emojivert.name_to_unified('WHITE SMILING FACE')}", "Hey #{Emojivert.name_to_unified('WINKING FACE')}"].sample))
       else
         if message.text.upcase.include?(Constants::COMMAND_CURRENT_SURVEY)
           SurveyServices.check_current_survey(sender_id)
