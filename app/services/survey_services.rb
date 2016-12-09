@@ -1,8 +1,7 @@
 class SurveyServices
   def self.answer_for_question(sender_id, type, content)
     session = Session.find_by(user_id: sender_id)
-
-    Response.find_or_create_by(session_id: session.id, response_type: type, content: content)
+    Response.create(session_id: session.id, response_type: type, content: content)
 
     self.get_additional(sender_id)
   end
@@ -27,7 +26,6 @@ class SurveyServices
       end
 
     elsif session.additional_pending?
-
       if message.upcase.include?('yes'.upcase)
         BotServices.message(Message.new(sender_id: sender_id, content: "Cool, I'm listening #{Emojivert.name_to_unified('EAR')}"))
       else
