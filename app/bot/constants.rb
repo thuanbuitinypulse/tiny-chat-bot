@@ -51,8 +51,7 @@ class Constants
       }
   ]
 
-  HELP_MESSAGE = "This bot allow you play the Hangman game." +
-      "\r\n\r\nYou can start by click on New Game menu option." +
-      "\r\nEach times, you can only answer by only 1 character." +
-      "\r\n\r\nHint:\r\n- You can type \"menu\" to show the main menu.\r\n- You can type \"start\" to start the game immediately.\r\n- You can type \"reset user\" to reset your score and all games."
+  HELP_MESSAGE = "Hi! I'm TINYbuddy #{Emojivert.name_to_unified('WHITE SMILING FACE')}" +
+      "\r\n\r\nYou can ask me to check the status of your current survey, send cheers and suggestions." +
+      "\r\nOr more simple, you can use the Menu at the bottom left if you don't know how to ask me."
 end
